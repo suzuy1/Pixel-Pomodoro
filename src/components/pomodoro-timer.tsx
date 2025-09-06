@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { SettingsDialog } from "@/components/settings-dialog";
 import { TodoList } from "@/components/todo-list";
+import { Confetti } from "@/components/confetti";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { fetchQuote } from "@/app/actions";
@@ -43,6 +44,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
   const [showEndAlert, setShowEndAlert] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [nextMode, setNextMode] = useState<Mode>("shortBreak");
   const [quote, setQuote] = useState(initialQuote);
   const { toast } = useToast();
@@ -82,6 +84,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
     setQuote(newQuote)
 
     if (mode === "focus") {
+      setShowConfetti(true);
       const newSessionsCompleted = sessionsCompleted + 1;
       setSessionsCompleted(newSessionsCompleted);
       const nextBreakMode = newSessionsCompleted % LONG_BREAK_INTERVAL === 0 ? "longBreak" : "shortBreak";
@@ -147,6 +150,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
 
   return (
     <div className="flex flex-col gap-4">
+      {showConfetti && <Confetti onComplete={() => setShowConfetti(false)} />}
       <div className={pixelatedCardClass}>
         <header className="flex justify-between items-center mb-4 sm:mb-6">
           <h1 className="text-xl sm:text-2xl font-bold">Pomodoro Timer</h1>

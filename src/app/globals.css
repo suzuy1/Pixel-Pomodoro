@@ -95,6 +95,25 @@
     animation-fill-mode: forwards;
   }
 
+  .confetti-particle {
+    position: fixed;
+    top: -10px;
+    will-change: transform;
+    animation: confetti-fall 3s linear forwards;
+    z-index: 1000;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
   @keyframes -creative-animation-in {
     from {
       transform: scale(0.95);
