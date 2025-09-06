@@ -71,18 +71,9 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
     setTimeRemaining(timeInSeconds[mode]);
   }, [mode, timeInSeconds]);
 
-  const handleSessionEnd = useCallback(async () => {
+  const handleSessionEnd = useCallback(() => {
     setIsActive(false);
     
-    let newQuote = "Time for a break!";
-    try {
-        const result = await fetchQuote();
-        if(result.quote) newQuote = result.quote;
-    } catch (e) {
-        console.error(e)
-    }
-    setQuote(newQuote)
-
     if (mode === "focus") {
       setShowConfetti(true);
       const newSessionsCompleted = sessionsCompleted + 1;
@@ -95,7 +86,6 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
 
     setShowEndAlert(true);
     
-    // Play a notification sound
     const audio = new Audio('/notification.mp3');
     audio.play().catch(e => console.log("Failed to play notification sound. User interaction might be needed."));
 
@@ -127,6 +117,22 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
       .toString()
       .padStart(2, "0")}:${(timeRemaining % 60).toString().padStart(2, "0")} | Pomodoro Timer`;
   }, [timeRemaining]);
+
+  useEffect(() => {
+    if (showEndAlert) {
+      (async () => {
+        try {
+          const result = await fetchQuote();
+          if (result.quote) {
+            setQuote(result.quote);
+          }
+        } catch (e) {
+          console.error("Failed to fetch quote on session end:", e);
+          setQuote("Time for a break!");
+        }
+      })();
+    }
+  }, [showEndAlert]);
 
 
   const formatTime = (seconds: number) => {
