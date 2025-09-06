@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
@@ -187,7 +188,6 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
           <p
             className={cn(
                 "text-7xl sm:text-8xl md:text-9xl font-headline text-foreground transition-all duration-300",
-                isActive && "animate-pulse",
                 isTimeVisible ? 'animate-in' : 'animate-out'
             )}
             aria-live="polite"
