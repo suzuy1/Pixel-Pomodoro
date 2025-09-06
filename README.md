@@ -1,65 +1,65 @@
-# Pomodoro Timer - Pixel Style 🍅
+# Pomodoro Timer - Gaya Pixel 🍅
 
-A simple yet powerful Pomodoro timer with a unique pixel art aesthetic to help you stay focused and productive.
+Sebuah timer Pomodoro sederhana namun kuat dengan estetika seni piksel yang unik untuk membantu Anda tetap fokus dan produktif.
 
-![App Screenshot](https://picsum.photos/800/600?data-ai-hint=app%20screenshot)
-*(You can replace this with a real screenshot of your app!)*
+![Cuplikan Layar Aplikasi](https://picsum.photos/800/600?data-ai-hint=app%20screenshot)
+*(Anda bisa mengganti ini dengan cuplikan layar aplikasi Anda!)*
 
-## ✨ Features
+## ✨ Fitur
 
-*   **Classic Pomodoro Timer:** Cycle through focus, short break, and long break sessions.
-*   **Customizable Durations:** Adjust the length of each session to fit your workflow in the settings.
-*   **Integrated To-Do List:** Plan your tasks for each focus session and check them off as you go. Your tasks are saved locally in your browser!
-*   **Motivational AI Quotes:** Get a fresh, inspiring quote at the end of each session to keep you going.
-*   **Pixel Art UI:** A fun, retro-inspired design with satisfying animations.
-*   **Confetti Celebration:** Enjoy a burst of pixel confetti every time you complete a focus session!
-*   **Responsive Design:** Works beautifully on both desktop and mobile devices.
+*   **Timer Pomodoro Klasik:** Siklus antara sesi fokus, istirahat pendek, dan istirahat panjang.
+*   **Durasi yang Dapat Disesuaikan:** Sesuaikan panjang setiap sesi agar sesuai dengan alur kerja Anda di pengaturan.
+*   **Daftar Tugas Terintegrasi:** Rencanakan tugas Anda untuk setiap sesi fokus dan centang saat selesai. Tugas Anda disimpan secara lokal di browser Anda!
+*   **Kutipan Motivasi AI:** Dapatkan kutipan baru yang menginspirasi di akhir setiap sesi untuk membuat Anda tetap termotivasi.
+*   **UI Seni Piksel:** Desain yang menyenangkan dan terinspirasi retro dengan animasi yang memuaskan.
+*   **Perayaan Konfeti:** Nikmati ledakan konfeti piksel setiap kali Anda menyelesaikan sesi fokus!
+*   **Desain Responsif:** Berfungsi dengan indah di perangkat desktop maupun seluler.
 
-## 🛠️ Tech Stack
+## 🛠️ Teknologi yang Digunakan
 
 *   **Framework:** [Next.js](https://nextjs.org/)
-*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Bahasa:** [TypeScript](https://www.typescriptlang.org/)
 *   **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [ShadCN UI](https://ui.shadcn.com/)
-*   **AI/Generative:** [Genkit](https://firebase.google.com/docs/genkit)
-*   **Fonts:** [Google Fonts (Silkscreen)](https://fonts.google.com/specimen/Silkscreen)
+*   **AI/Generatif:** [Genkit](https://firebase.google.com/docs/genkit)
+*   **Font:** [Google Fonts (Silkscreen)](https://fonts.google.com/specimen/Silkscreen)
 
-## 🚀 Getting Started
+## 🚀 Memulai
 
-To get a local copy up and running, follow these simple steps.
+Untuk mendapatkan salinan lokal dan menjalankannya, ikuti langkah-langkah sederhana ini.
 
-### Prerequisites
+### Prasyarat
 
-You need to have [Node.js](https://nodejs.org/en) (v18 or later) and a package manager like [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) installed.
+Anda harus menginstal [Node.js](https://nodejs.org/en) (v18 atau lebih baru) dan manajer paket seperti [npm](https://www.npmjs.com/) atau [yarn](https://yarnpkg.com/).
 
-### Installation
+### Instalasi
 
-1.  Clone the repo:
+1.  Kloning repositori:
     ```sh
-    git clone https://github.com/your-username/your-repo-name.git
+    git clone https://github.com/nama-pengguna-anda/nama-repo-anda.git
     ```
-2.  Navigate to the project directory:
+2.  Arahkan ke direktori proyek:
     ```sh
-    cd your-repo-name
+    cd nama-repo-anda
     ```
-3.  Install NPM packages:
+3.  Instal paket NPM:
     ```sh
     npm install
     ```
-4.  Create a `.env.local` file in the root of your project and add your Gemini API key:
+4.  Buat file `.env.local` di root proyek Anda dan tambahkan kunci API Gemini Anda:
     ```
-    GEMINI_API_KEY=YOUR_API_KEY
+    GEMINI_API_KEY=KUNCI_API_ANDA
     ```
 
-### Running the Application
+### Menjalankan Aplikasi
 
-To run the development server:
+Untuk menjalankan server pengembangan:
 
 ```sh
 npm run dev
 ```
 
-Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
+Buka [http://localhost:9002](http://localhost:9002) dengan browser Anda untuk melihat hasilnya.
 
 ---
 
-This project was built with Firebase Studio.
+Proyek ini dibangun dengan Firebase Studio.
