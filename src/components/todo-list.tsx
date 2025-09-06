@@ -33,6 +33,7 @@ export function TodoList() {
 
   useEffect(() => {
     try {
+      // We remove the isNew property before saving to avoid animation on page load.
       localStorage.setItem("pomodoro-tasks", JSON.stringify(tasks.map(({ isNew, ...rest }) => rest)));
     } catch (error) {
       console.error("Failed to save tasks to local storage:", error);
@@ -46,7 +47,7 @@ export function TodoList() {
       id: Date.now(),
       text: newTask,
       completed: false,
-      isNew: true,
+      isNew: true, // For entry animation
     };
     setTasks([...tasks, newTaskObject]);
     setNewTask("");
@@ -100,7 +101,7 @@ export function TodoList() {
             className={cn(
               "flex items-center gap-3 bg-muted p-2 border-2 border-foreground transition-all duration-300",
               task.isNew ? "animate-in" : "",
-              task.completed ? "opacity-50 scale-95" : "opacity-100 scale-100"
+              task.completed ? "opacity-50" : "opacity-100"
             )}
             onAnimationEnd={() => handleAnimationEnd(task.id)}
           >
