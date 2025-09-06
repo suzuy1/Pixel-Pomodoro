@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Pixel Focus',
+  title: 'Pomodoro Timer',
   description: 'A Pomodoro timer to help you focus.',
 };
 

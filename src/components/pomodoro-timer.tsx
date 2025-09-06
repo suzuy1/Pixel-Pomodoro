@@ -109,7 +109,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   useEffect(() => {
     document.title = `${Math.floor(timeRemaining / 60)
       .toString()
-      .padStart(2, "0")}:${(timeRemaining % 60).toString().padStart(2, "0")} | Pixel Focus`;
+      .padStart(2, "0")}:${(timeRemaining % 60).toString().padStart(2, "0")} | Pomodoro Timer`;
   }, [timeRemaining]);
 
 
@@ -134,7 +134,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   return (
     <div className={pixelatedCardClass}>
       <header className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Pixel Focus</h1>
+        <h1 className="text-2xl font-bold">Pomodoro Timer</h1>
         <div className="flex gap-2">
             <Button
                 variant="ghost"
