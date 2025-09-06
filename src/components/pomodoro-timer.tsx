@@ -23,6 +23,12 @@ const LONG_BREAK_INTERVAL = 4; // Number of focus sessions before a long break
 
 type Mode = "focus" | "shortBreak" | "longBreak";
 
+const modeTitles: Record<Mode, string> = {
+  focus: "Fokus Time",
+  shortBreak: "Short Break",
+  longBreak: "Long Break",
+};
+
 export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   const [durations, setDurations] = useState({
     focus: 25,
@@ -157,13 +163,17 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
         </div>
       </header>
       
-      <Tabs value={mode} onValueChange={(value) => switchMode(value as Mode)} className="w-full mb-8">
+      <Tabs value={mode} onValueChange={(value) => switchMode(value as Mode)} className="w-full mb-4">
         <TabsList className="grid w-full grid-cols-3 bg-muted p-1">
           <TabsTrigger value="focus">Focus</TabsTrigger>
           <TabsTrigger value="shortBreak">Short Break</TabsTrigger>
           <TabsTrigger value="longBreak">Long Break</TabsTrigger>
         </TabsList>
       </Tabs>
+
+      <div className="text-center mb-4">
+        <p className="text-lg text-foreground font-bold">{modeTitles[mode]}</p>
+      </div>
 
       <div className="text-center my-10">
         <p
