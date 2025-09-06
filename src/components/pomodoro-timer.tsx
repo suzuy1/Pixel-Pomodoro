@@ -128,8 +128,8 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
     setIsActive(true);
   };
 
-  const pixelatedCardClass = "w-full max-w-md mx-auto bg-card p-6 sm:p-8 rounded-2xl border-2 border-foreground shadow-[8px_8px_0px_hsl(var(--foreground))] transition-all duration-300 dark:shadow-[8px_8px_0px_hsl(var(--primary))]";
-  const pixelButtonClasses = "font-headline font-bold border-2 border-foreground rounded-lg shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-0.5 active:translate-y-0.5 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))]";
+  const pixelatedCardClass = "w-full max-w-md mx-auto bg-card p-6 sm:p-8 border-4 border-foreground shadow-[8px_8px_0px_hsl(var(--foreground))]";
+  const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))]";
 
   return (
     <div className={pixelatedCardClass}>
@@ -158,10 +158,10 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
       </header>
       
       <Tabs value={mode} onValueChange={(value) => switchMode(value as Mode)} className="w-full mb-8">
-        <TabsList className="grid w-full grid-cols-3 bg-muted rounded-lg p-1">
-          <TabsTrigger value="focus" className="rounded-md">Focus</TabsTrigger>
-          <TabsTrigger value="shortBreak" className="rounded-md">Short Break</TabsTrigger>
-          <TabsTrigger value="longBreak" className="rounded-md">Long Break</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 bg-muted p-1">
+          <TabsTrigger value="focus">Focus</TabsTrigger>
+          <TabsTrigger value="shortBreak">Short Break</TabsTrigger>
+          <TabsTrigger value="longBreak">Long Break</TabsTrigger>
         </TabsList>
       </Tabs>
 
@@ -183,7 +183,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
         </Button>
       </div>
 
-      <div className="text-center min-h-[4rem] flex items-center justify-center p-2 rounded-lg bg-muted">
+      <div className="text-center min-h-[4rem] flex items-center justify-center p-2 bg-muted border-2 border-foreground">
         <p className="text-sm italic text-muted-foreground">"{quote}"</p>
       </div>
 

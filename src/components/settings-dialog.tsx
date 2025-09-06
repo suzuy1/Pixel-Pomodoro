@@ -64,7 +64,7 @@ export function SettingsDialog({ open, onOpenChange, durations, setDurations }: 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] rounded-none border-4 border-foreground shadow-[8px_8px_0px_hsl(var(--foreground))]">
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>
