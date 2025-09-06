@@ -61,7 +61,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
     
     let newQuote = "Time for a break!";
     try {
-        const result = await fetchQuote('break');
+        const result = await fetchQuote();
         if(result.quote) newQuote = result.quote;
     } catch (e) {
         console.error(e)

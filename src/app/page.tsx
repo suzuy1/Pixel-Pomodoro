@@ -4,7 +4,7 @@ import { getMotivationalQuote, type MotivationalQuoteOutput } from '@/ai/flows/d
 export default async function Home() {
   let initialQuote: MotivationalQuoteOutput = { quote: "take a breath, you are right on time ✨" };
   try {
-    const quoteResult = await getMotivationalQuote('start');
+    const quoteResult = await getMotivationalQuote();
     if (quoteResult && quoteResult.quote) {
       initialQuote = quoteResult;
     }

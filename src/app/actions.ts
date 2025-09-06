@@ -2,9 +2,9 @@
 
 import { getMotivationalQuote, type MotivationalQuoteOutput } from '@/ai/flows/display-motivational-quotes';
 
-export async function fetchQuote(context: string): Promise<MotivationalQuoteOutput> {
+export async function fetchQuote(): Promise<MotivationalQuoteOutput> {
   try {
-    const quoteResult = await getMotivationalQuote(context);
+    const quoteResult = await getMotivationalQuote();
     if (quoteResult && quoteResult.quote) {
       return quoteResult;
     }

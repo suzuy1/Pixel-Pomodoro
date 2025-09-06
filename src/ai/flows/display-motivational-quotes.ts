@@ -14,53 +14,23 @@ const MotivationalQuoteOutputSchema = z.object({
 });
 export type MotivationalQuoteOutput = z.infer<typeof MotivationalQuoteOutputSchema>;
 
-const isQuoteNeededTool = ai.defineTool({
-  name: 'isQuoteNeeded',
-  description: 'Determines whether a motivational quote is needed based on the context.',
-  inputSchema: z.object({
-    context: z.string().describe('The current context or situation.'),
-  }),
-  outputSchema: z.boolean().describe('True if a quote is needed, false otherwise.'),
-}, async (input) => {
-  // Basic logic to determine if a quote is needed (can be expanded).
-  return input.context.toLowerCase().includes('break') || input.context.toLowerCase().includes('end');
-});
-
 const motivationalQuotePrompt = ai.definePrompt({
   name: 'motivationalQuotePrompt',
-  tools: [isQuoteNeededTool],
   output: {schema: MotivationalQuoteOutputSchema},
-  prompt: `You are a motivational speaker. Generate a quote to encourage focus and relaxation.
-
-  Decide whether a motivational quote is needed using the isQuoteNeeded tool, and generate a quote if the tool returns true.
-  The current context is: {{{context}}}
-  `,
+  prompt: `You are a motivational speaker. Generate a quote to encourage focus and relaxation.`,
 });
 
-export async function getMotivationalQuote(context: string): Promise<MotivationalQuoteOutput> {
-  return getMotivationalQuoteFlow({context});
+export async function getMotivationalQuote(): Promise<MotivationalQuoteOutput> {
+  return getMotivationalQuoteFlow();
 }
-
-const GetMotivationalQuoteInputSchema = z.object({
-  context: z.string().describe('The context in which the quote will be used.'),
-});
 
 const getMotivationalQuoteFlow = ai.defineFlow(
   {
     name: 'getMotivationalQuoteFlow',
-    inputSchema: GetMotivationalQuoteInputSchema,
     outputSchema: MotivationalQuoteOutputSchema,
   },
-  async input => {
-    const useQuoteToolResult = await isQuoteNeededTool({
-      context: input.context,
-    });
-
-    if (useQuoteToolResult) {
-      const {output} = await motivationalQuotePrompt(input);
-      return output!;
-    } else {
-      return {quote: ''};
-    }
+  async () => {
+    const {output} = await motivationalQuotePrompt();
+    return output!;
   }
 );
