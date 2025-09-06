@@ -35,7 +35,7 @@ Anda harus menginstal [Node.js](https://nodejs.org/en) (v18 atau lebih baru) dan
 
 1.  Kloning repositori:
     ```sh
-    git clone https://github.com/nama-pengguna-anda/nama-repo-anda.git
+    git clonegit clone https://github.com/suzuy1/Pixel-Pomodoro.git
     ```
 2.  Arahkan ke direktori proyek:
     ```sh
