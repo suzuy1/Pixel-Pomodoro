@@ -167,7 +167,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
 
       <div className="text-center my-10">
         <p
-          className="text-7xl sm:text-8xl md:text-9xl font-bold font-mono text-foreground"
+          className="text-7xl sm:text-8xl md:text-9xl font-bold font-headline text-foreground"
           aria-live="polite"
         >
           {formatTime(timeRemaining)}
