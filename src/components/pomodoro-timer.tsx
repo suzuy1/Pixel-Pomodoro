@@ -41,7 +41,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
   const [showEndAlert, setShowEndAlert] = useState(false);
-  const [nextMode, setNextMode] = useState<"shortBreak" | "longBreak">("shortBreak");
+  const [nextMode, setNextMode] = useState<Mode>("shortBreak");
   const [quote, setQuote] = useState(initialQuote);
   const { toast } = useToast();
 
@@ -129,24 +129,25 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
     setIsActive(!isActive);
   };
   
-  const handleConfirmBreak = () => {
+  const handleConfirmAction = () => {
     switchMode(nextMode);
     setIsActive(true);
+    setShowEndAlert(false);
   };
 
-  const pixelatedCardClass = "w-full max-w-md mx-auto bg-card p-6 sm:p-8 border-4 border-foreground shadow-[8px_8px_0px_hsl(var(--foreground))]";
+  const pixelatedCardClass = "w-full max-w-md mx-auto bg-card p-4 sm:p-8 border-4 border-foreground shadow-[8px_8px_0px_hsl(var(--foreground))]";
   const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))]";
 
   return (
     <div className={pixelatedCardClass}>
-      <header className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Pomodoro Timer</h1>
+      <header className="flex justify-between items-center mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold">Pomodoro Timer</h1>
         <div className="flex gap-2">
             <Button
                 variant="ghost"
                 size="icon"
                 onClick={resetTimer}
-                className={cn(pixelButtonClasses, "w-11 h-11 p-0 bg-card hover:bg-muted")}
+                className={cn(pixelButtonClasses, "w-10 h-10 sm:w-11 sm:h-11 p-0 bg-card hover:bg-muted")}
                 aria-label="Reset Timer"
             >
                 <RotateCcw className="h-5 w-5" />
@@ -155,7 +156,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
                 variant="ghost"
                 size="icon"
                 onClick={() => setShowSettings(true)}
-                className={cn(pixelButtonClasses, "w-11 h-11 p-0 bg-card hover:bg-muted")}
+                className={cn(pixelButtonClasses, "w-10 h-10 sm:w-11 sm:h-11 p-0 bg-card hover:bg-muted")}
                 aria-label="Settings"
             >
                 <Settings className="h-5 w-5" />
@@ -165,17 +166,17 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
       
       <Tabs value={mode} onValueChange={(value) => switchMode(value as Mode)} className="w-full mb-4">
         <TabsList className="grid w-full grid-cols-3 bg-muted p-1">
-          <TabsTrigger value="focus">Focus</TabsTrigger>
-          <TabsTrigger value="shortBreak">Short Break</TabsTrigger>
-          <TabsTrigger value="longBreak">Long Break</TabsTrigger>
+          <TabsTrigger value="focus" className="text-xs sm:text-sm">Focus</TabsTrigger>
+          <TabsTrigger value="shortBreak" className="text-xs sm:text-sm">Short Break</TabsTrigger>
+          <TabsTrigger value="longBreak" className="text-xs sm:text-sm">Long Break</TabsTrigger>
         </TabsList>
       </Tabs>
 
       <div className="text-center mb-4">
-        <p className="text-lg text-foreground font-bold">{modeTitles[mode]}</p>
+        <p className="text-base sm:text-lg text-foreground font-bold">{modeTitles[mode]}</p>
       </div>
 
-      <div className="text-center my-10">
+      <div className="text-center my-6 sm:my-10">
         <p
           className="text-7xl sm:text-8xl md:text-9xl font-headline text-foreground"
           aria-live="polite"
@@ -184,17 +185,17 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
         </p>
       </div>
 
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-6 sm:mb-8">
         <Button
           onClick={toggleTimer}
-          className={cn(pixelButtonClasses, "bg-primary text-primary-foreground text-2xl h-16 w-48")}
+          className={cn(pixelButtonClasses, "bg-primary text-primary-foreground text-xl sm:text-2xl h-14 w-40 sm:h-16 sm:w-48")}
         >
           {isActive ? "Pause" : "Start"}
         </Button>
       </div>
 
-      <div className="text-center min-h-[4rem] flex items-center justify-center p-2 bg-muted border-2 border-foreground">
-        <p className="text-sm italic text-muted-foreground">"{quote}"</p>
+      <div className="text-center min-h-[3rem] sm:min-h-[4rem] flex items-center justify-center p-2 bg-muted border-2 border-foreground">
+        <p className="text-xs sm:text-sm italic text-muted-foreground">"{quote}"</p>
       </div>
 
       <SettingsDialog
@@ -207,14 +208,20 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
       <AlertDialog open={showEndAlert} onOpenChange={setShowEndAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Session Ended!</AlertDialogTitle>
+            <AlertDialogTitle>
+              {mode !== 'focus' ? 'Break Over!' : 'Session Ended!'}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              Great work! Time for a {nextMode === 'shortBreak' ? 'short' : 'long'} break?
+              {mode !== 'focus'
+                ? "Time to get back to focus!"
+                : `Great work! Time for a ${nextMode === 'shortBreak' ? 'short' : 'long'} break?`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Dismiss</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmBreak}>Start Break</AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmAction}>
+              {mode !== 'focus' ? 'Start Focus' : 'Start Break'}
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
