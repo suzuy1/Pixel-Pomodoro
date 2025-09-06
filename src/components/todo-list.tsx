@@ -100,7 +100,7 @@ export function TodoList() {
             className={cn(
               "flex items-center gap-3 bg-muted p-2 border-2 border-foreground transition-all duration-300",
               task.isNew ? "animate-in" : "",
-              task.completed ? "opacity-50" : ""
+              task.completed ? "opacity-50 scale-95" : "opacity-100 scale-100"
             )}
             onAnimationEnd={() => handleAnimationEnd(task.id)}
           >
