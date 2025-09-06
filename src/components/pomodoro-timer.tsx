@@ -15,6 +15,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { SettingsDialog } from "@/components/settings-dialog";
+import { TodoList } from "@/components/todo-list";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { fetchQuote } from "@/app/actions";
@@ -139,63 +140,69 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))]";
 
   return (
-    <div className={pixelatedCardClass}>
-      <header className="flex justify-between items-center mb-4 sm:mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold">Pomodoro Timer</h1>
-        <div className="flex gap-2">
-            <Button
-                variant="ghost"
-                size="icon"
-                onClick={resetTimer}
-                className={cn(pixelButtonClasses, "w-10 h-10 sm:w-11 sm:h-11 p-0 bg-card hover:bg-muted")}
-                aria-label="Reset Timer"
-            >
-                <RotateCcw className="h-5 w-5" />
-            </Button>
-            <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowSettings(true)}
-                className={cn(pixelButtonClasses, "w-10 h-10 sm:w-11 sm:h-11 p-0 bg-card hover:bg-muted")}
-                aria-label="Settings"
-            >
-                <Settings className="h-5 w-5" />
-            </Button>
+    <div className="flex flex-col gap-4">
+      <div className={pixelatedCardClass}>
+        <header className="flex justify-between items-center mb-4 sm:mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold">Pomodoro Timer</h1>
+          <div className="flex gap-2">
+              <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={resetTimer}
+                  className={cn(pixelButtonClasses, "w-10 h-10 sm:w-11 sm:h-11 p-0 bg-card hover:bg-muted")}
+                  aria-label="Reset Timer"
+              >
+                  <RotateCcw className="h-5 w-5" />
+              </Button>
+              <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowSettings(true)}
+                  className={cn(pixelButtonClasses, "w-10 h-10 sm:w-11 sm:h-11 p-0 bg-card hover:bg-muted")}
+                  aria-label="Settings"
+              >
+                  <Settings className="h-5 w-5" />
+              </Button>
+          </div>
+        </header>
+        
+        <Tabs value={mode} onValueChange={(value) => switchMode(value as Mode)} className="w-full mb-4">
+          <TabsList className="grid w-full grid-cols-3 bg-muted p-1">
+            <TabsTrigger value="focus" className="text-xs sm:text-sm">Focus</TabsTrigger>
+            <TabsTrigger value="shortBreak" className="text-xs sm:text-sm">Short Break</TabsTrigger>
+            <TabsTrigger value="longBreak" className="text-xs sm:text-sm">Long Break</TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        <div className="text-center mb-4">
+          <p className="text-base sm:text-lg text-foreground font-bold">{modeTitles[mode]}</p>
         </div>
-      </header>
+
+        <div className="text-center my-6 sm:my-10">
+          <p
+            className="text-7xl sm:text-8xl md:text-9xl font-headline text-foreground"
+            aria-live="polite"
+          >
+            {formatTime(timeRemaining)}
+          </p>
+        </div>
+
+        <div className="flex justify-center mb-6 sm:mb-8">
+          <Button
+            onClick={toggleTimer}
+            className={cn(pixelButtonClasses, "bg-primary text-primary-foreground text-xl sm:text-2xl h-14 w-40 sm:h-16 sm:w-48")}
+          >
+            {isActive ? "Pause" : "Start"}
+          </Button>
+        </div>
+
+        <div className="text-center min-h-[3rem] sm:min-h-[4rem] flex items-center justify-center p-2 bg-muted border-2 border-foreground">
+          <p className="text-xs sm:text-sm italic text-muted-foreground">"{quote}"</p>
+        </div>
+      </div>
       
-      <Tabs value={mode} onValueChange={(value) => switchMode(value as Mode)} className="w-full mb-4">
-        <TabsList className="grid w-full grid-cols-3 bg-muted p-1">
-          <TabsTrigger value="focus" className="text-xs sm:text-sm">Focus</TabsTrigger>
-          <TabsTrigger value="shortBreak" className="text-xs sm:text-sm">Short Break</TabsTrigger>
-          <TabsTrigger value="longBreak" className="text-xs sm:text-sm">Long Break</TabsTrigger>
-        </TabsList>
-      </Tabs>
-
-      <div className="text-center mb-4">
-        <p className="text-base sm:text-lg text-foreground font-bold">{modeTitles[mode]}</p>
-      </div>
-
-      <div className="text-center my-6 sm:my-10">
-        <p
-          className="text-7xl sm:text-8xl md:text-9xl font-headline text-foreground"
-          aria-live="polite"
-        >
-          {formatTime(timeRemaining)}
-        </p>
-      </div>
-
-      <div className="flex justify-center mb-6 sm:mb-8">
-        <Button
-          onClick={toggleTimer}
-          className={cn(pixelButtonClasses, "bg-primary text-primary-foreground text-xl sm:text-2xl h-14 w-40 sm:h-16 sm:w-48")}
-        >
-          {isActive ? "Pause" : "Start"}
-        </Button>
-      </div>
-
-      <div className="text-center min-h-[3rem] sm:min-h-[4rem] flex items-center justify-center p-2 bg-muted border-2 border-foreground">
-        <p className="text-xs sm:text-sm italic text-muted-foreground">"{quote}"</p>
+      <div className={cn(pixelatedCardClass, "mt-0")}>
+        <TodoList />
       </div>
 
       <SettingsDialog
