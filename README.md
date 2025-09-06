@@ -1,65 +1,101 @@
 # Pomodoro Timer - Gaya Pixel 🍅
 
-Sebuah timer Pomodoro sederhana namun kuat dengan estetika seni piksel yang unik untuk membantu Anda tetap fokus dan produktif.
+Sebuah timer Pomodoro sederhana namun powerful dengan estetika seni piksel unik untuk membantumu tetap fokus dan produktif.
 
 ![Cuplikan Layar Aplikasi](https://picsum.photos/800/600?data-ai-hint=app%20screenshot)
-*(Anda bisa mengganti ini dengan cuplikan layar aplikasi Anda!)*
+*Ganti gambar ini dengan cuplikan layar asli aplikasi Anda!*
 
-## ✨ Fitur
+---
 
-*   **Timer Pomodoro Klasik:** Siklus antara sesi fokus, istirahat pendek, dan istirahat panjang.
-*   **Durasi yang Dapat Disesuaikan:** Sesuaikan panjang setiap sesi agar sesuai dengan alur kerja Anda di pengaturan.
-*   **Daftar Tugas Terintegrasi:** Rencanakan tugas Anda untuk setiap sesi fokus dan centang saat selesai. Tugas Anda disimpan secara lokal di browser Anda!
-*   **Kutipan Motivasi AI:** Dapatkan kutipan baru yang menginspirasi di akhir setiap sesi untuk membuat Anda tetap termotivasi.
-*   **UI Seni Piksel:** Desain yang menyenangkan dan terinspirasi retro dengan animasi yang memuaskan.
-*   **Perayaan Konfeti:** Nikmati ledakan konfeti piksel setiap kali Anda menyelesaikan sesi fokus!
-*   **Desain Responsif:** Berfungsi dengan indah di perangkat desktop maupun seluler.
+## ✨ Fitur Utama
+
+- **Timer Pomodoro Klasik:** Otomatis berganti antara sesi fokus, istirahat singkat, dan istirahat panjang.
+- **Durasi Fleksibel:** Atur panjang tiap sesi sesuai kebutuhanmu melalui pengaturan.
+- **Daftar Tugas Terintegrasi:** Rencanakan tugas untuk setiap sesi fokus dan centang saat selesai. Semua tersimpan lokal di browser!
+- **Kutipan Motivasi AI:** Dapatkan kutipan inspiratif di akhir setiap sesi untuk menjaga semangatmu.
+- **UI Seni Piksel:** Desain retro yang menyenangkan dengan animasi piksel memuaskan.
+- **Perayaan Konfeti:** Nikmati ledakan konfeti piksel setiap kali menyelesaikan sesi fokus!
+- **Desain Responsif:** Nyaman digunakan di desktop maupun perangkat seluler.
+
+---
 
 ## 🛠️ Teknologi yang Digunakan
 
-*   **Framework:** [Next.js](https://nextjs.org/)
-*   **Bahasa:** [TypeScript](https://www.typescriptlang.org/)
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [ShadCN UI](https://ui.shadcn.com/)
-*   **AI/Generatif:** [Genkit](https://firebase.google.com/docs/genkit)
-*   **Font:** [Google Fonts (Silkscreen)](https://fonts.google.com/specimen/Silkscreen)
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Bahasa:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) & [ShadCN UI](https://ui.shadcn.com/)
+- **AI/Generatif:** [Genkit (Firebase)](https://firebase.google.com/docs/genkit)
+- **Font:** [Google Fonts - Silkscreen](https://fonts.google.com/specimen/Silkscreen)
 
-## 🚀 Memulai
+---
 
-Untuk mendapatkan salinan lokal dan menjalankannya, ikuti langkah-langkah sederhana ini.
+## 🚀 Cara Memulai
+
+Ingin mencoba secara lokal? Ikuti langkah-langkah berikut:
 
 ### Prasyarat
 
-Anda harus menginstal [Node.js](https://nodejs.org/en) (v18 atau lebih baru) dan manajer paket seperti [npm](https://www.npmjs.com/) atau [yarn](https://yarnpkg.com/).
+- [Node.js](https://nodejs.org/en) v18 atau lebih baru
+- [npm](https://www.npmjs.com/) atau [yarn](https://yarnpkg.com/)
 
 ### Instalasi
 
-1.  Kloning repositori:
+1. **Kloning repositori ini:**
     ```sh
-    git clonegit clone https://github.com/suzuy1/Pixel-Pomodoro.git
+    git clone https://github.com/suzuy1/Pixel-Pomodoro.git
     ```
-2.  Arahkan ke direktori proyek:
+2. **Masuk ke folder proyek:**
     ```sh
-    cd nama-repo-anda
+    cd Pixel-Pomodoro
     ```
-3.  Instal paket NPM:
+3. **Install dependensi:**
     ```sh
     npm install
     ```
-4.  Buat file `.env.local` di root proyek Anda dan tambahkan kunci API Gemini Anda:
+    atau jika menggunakan yarn:
+    ```sh
+    yarn install
     ```
-    GEMINI_API_KEY=KUNCI_API_ANDA
-    ```
+4. **Siapkan variabel lingkungan untuk API Gemini:**
+    - Buat file `.env.local` di root project.
+    - Isi dengan:
+      ```
+      GEMINI_API_KEY=KUNCI_API_ANDA
+      ```
+    - Dapatkan kunci API Gemini dari [Firebase Genkit](https://firebase.google.com/docs/genkit).
 
 ### Menjalankan Aplikasi
 
-Untuk menjalankan server pengembangan:
+Jalankan server pengembangan:
 
 ```sh
 npm run dev
 ```
+atau
+```sh
+yarn dev
+```
 
-Buka [http://localhost:9002](http://localhost:9002) dengan browser Anda untuk melihat hasilnya.
+Buka [http://localhost:9002](http://localhost:9002) di browser Anda untuk melihat aplikasi.
 
 ---
 
-Proyek ini dibangun dengan Firebase Studio.
+## 📸 Demo
+
+*Jika sudah tersedia, tambahkan tautan demo di sini!*
+
+---
+
+## 🤝 Kontribusi
+
+Kontribusi sangat terbuka! Silakan buka issue atau pull request untuk fitur, perbaikan bug, atau saran.
+
+---
+
+## 📄 Lisensi
+
+MIT License. Lihat file LICENSE untuk detail lebih lanjut.
+
+---
+
+> Proyek ini dikembangkan menggunakan [Firebase Studio](https://firebase.google.com/products/extensions/firebase-studio).
