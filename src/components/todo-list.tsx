@@ -12,6 +12,7 @@ interface Task {
   id: number;
   text: string;
   completed: boolean;
+  isNew?: boolean;
 }
 
 export function TodoList() {
@@ -32,7 +33,7 @@ export function TodoList() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("pomodoro-tasks", JSON.stringify(tasks));
+      localStorage.setItem("pomodoro-tasks", JSON.stringify(tasks.map(({ isNew, ...rest }) => rest)));
     } catch (error) {
       console.error("Failed to save tasks to local storage:", error);
     }
@@ -45,6 +46,7 @@ export function TodoList() {
       id: Date.now(),
       text: newTask,
       completed: false,
+      isNew: true,
     };
     setTasks([...tasks, newTaskObject]);
     setNewTask("");
@@ -66,8 +68,14 @@ export function TodoList() {
   const clearCompleted = () => {
     setTasks(tasks.filter((task) => !task.completed));
   };
+  
+  const handleAnimationEnd = (id: number) => {
+    setTasks(prevTasks => prevTasks.map(task => 
+      task.id === id ? { ...task, isNew: false } : task
+    ));
+  };
 
-  const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))]";
+  const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))] active:scale-95";
 
   return (
     <div className="w-full">
@@ -87,7 +95,15 @@ export function TodoList() {
       </form>
       <div className="space-y-3 max-h-48 overflow-y-auto pr-2">
         {tasks.map((task) => (
-          <div key={task.id} className="flex items-center gap-3 bg-muted p-2 border-2 border-foreground">
+          <div 
+            key={task.id} 
+            className={cn(
+              "flex items-center gap-3 bg-muted p-2 border-2 border-foreground transition-all duration-300",
+              task.isNew ? "animate-in" : "",
+              task.completed ? "opacity-50" : ""
+            )}
+            onAnimationEnd={() => handleAnimationEnd(task.id)}
+          >
             <Checkbox
               id={`task-${task.id}`}
               checked={task.completed}
@@ -96,7 +112,7 @@ export function TodoList() {
             <label
               htmlFor={`task-${task.id}`}
               className={cn(
-                "flex-grow text-sm cursor-pointer",
+                "flex-grow text-sm cursor-pointer transition-all duration-300",
                 task.completed && "line-through text-muted-foreground"
               )}
             >
@@ -106,7 +122,7 @@ export function TodoList() {
               variant="ghost"
               size="icon"
               onClick={() => deleteTask(task.id)}
-              className="h-7 w-7 p-1 hover:bg-destructive/20"
+              className="h-7 w-7 p-1 hover:bg-destructive/20 active:scale-90"
               aria-label="Delete task"
             >
               <Trash2 className="h-4 w-4 text-destructive" />

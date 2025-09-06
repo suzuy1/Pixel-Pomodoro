@@ -83,3 +83,37 @@
     image-rendering: pixelated;
   }
 }
+
+@layer utilities {
+  .animate-in {
+    animation-name:-creative-animation-in;
+    animation-duration:300ms;
+  }
+  .animate-out {
+    animation-name:-creative-animation-out;
+    animation-duration:300ms;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes -creative-animation-in {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes -creative-animation-out {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+  }
+}

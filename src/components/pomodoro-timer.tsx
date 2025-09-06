@@ -45,6 +45,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   const [nextMode, setNextMode] = useState<Mode>("shortBreak");
   const [quote, setQuote] = useState(initialQuote);
   const { toast } = useToast();
+  const [isTimeVisible, setIsTimeVisible] = useState(true);
 
   const timeInSeconds = useMemo(() => ({
     focus: durations.focus * 60,
@@ -54,8 +55,12 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
 
   const switchMode = useCallback((newMode: Mode) => {
     setIsActive(false);
-    setMode(newMode);
-    setTimeRemaining(timeInSeconds[newMode]);
+    setIsTimeVisible(false);
+    setTimeout(() => {
+        setMode(newMode);
+        setTimeRemaining(timeInSeconds[newMode]);
+        setIsTimeVisible(true);
+    }, 300); // Corresponds to animation duration
   }, [timeInSeconds]);
   
   const resetTimer = useCallback(() => {
@@ -137,7 +142,7 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
   };
 
   const pixelatedCardClass = "w-full max-w-md mx-auto bg-card p-4 sm:p-8 border-4 border-foreground shadow-[8px_8px_0px_hsl(var(--foreground))]";
-  const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))]";
+  const pixelButtonClasses = "font-headline font-bold border-2 border-foreground shadow-[4px_4px_0px_hsl(var(--foreground))] transition-all hover:shadow-[2px_2px_0px_hsl(var(--foreground))] active:shadow-none active:translate-x-1 active:translate-y-1 transform-gpu duration-150 dark:shadow-[4px_4px_0px_hsl(var(--primary))] dark:hover:shadow-[2px_2px_0px_hsl(var(--primary))] active:scale-95";
 
   return (
     <div className="flex flex-col gap-4">
@@ -178,9 +183,13 @@ export function PomodoroTimer({ initialQuote }: { initialQuote: string }) {
           <p className="text-base sm:text-lg text-foreground font-bold">{modeTitles[mode]}</p>
         </div>
 
-        <div className="text-center my-6 sm:my-10">
+        <div className="text-center my-6 sm:my-10 h-24 sm:h-28 md:h-32 flex items-center justify-center">
           <p
-            className="text-7xl sm:text-8xl md:text-9xl font-headline text-foreground"
+            className={cn(
+                "text-7xl sm:text-8xl md:text-9xl font-headline text-foreground transition-all duration-300",
+                isActive && "animate-pulse",
+                isTimeVisible ? 'animate-in' : 'animate-out'
+            )}
             aria-live="polite"
           >
             {formatTime(timeRemaining)}
