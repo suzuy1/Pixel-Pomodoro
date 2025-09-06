@@ -2,8 +2,7 @@
 
 Sebuah timer Pomodoro sederhana namun powerful dengan estetika seni piksel unik untuk membantumu tetap fokus dan produktif.
 
-![Cuplikan Layar Aplikasi](https://picsum.photos/800/600?data-ai-hint=app%20screenshot)
-*Ganti gambar ini dengan cuplikan layar asli aplikasi Anda!*
+
 
 ---
 
